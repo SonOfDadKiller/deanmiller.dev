@@ -1,1 +1,51 @@
-<p>Hello World!</p>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>WebGL</title>
+		<meta charset="utf-8">
+		<meta name="author" content="Dean Miller">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+			* { margin: 0; padding: 0;}
+
+			body, html {
+				height:100%;
+				background-color: rgb(2.5, 20.4, 51);
+			}
+
+            #c {
+				position: absolute;
+                width: 100%;
+                height: 100%;
+				margin: 0px;
+            }
+
+            #error {
+				position: absolute;
+				text-align: right;
+				top: 0px;
+				right: 0px;
+                color: red;
+            }
+
+			#name {
+				position: absolute;
+				color: rgba(1, 1, 1, 0.6);
+				margin: 8px;
+				font-family: sans-serif;
+				user-select: none;
+			}
+        </style>
+	</head>
+	<body>
+		<p id="error"></p>
+
+		<canvas id="c"></canvas>
+
+		<h1 id="name">deanmiller.dev</h1>
+
+		<!-- Load Demo -->
+		<script>let cubefieldSize = 50;</script>
+        <script src="src/cubefield.js" type="module"></script>
+	</body>
+</html>
