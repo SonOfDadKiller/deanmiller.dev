@@ -1,6 +1,4 @@
-//Vert data
-
-const _cube = 
+export const cube = 
 {
     vertices : [
         //pos				//normal		   //cubePos
@@ -57,7 +55,3 @@ const _cube =
         21, 22, 23
     ]
 }
-
-
-
-export const cube = _cube;
