@@ -4,7 +4,7 @@ import * as glMatrix from "./../lib/glMatrix/index.js"
 
 function Radians(degrees)
 {
-    var pi = Math.PI;
+    let pi = Math.PI;
     return degrees * (pi / 180);
 }
 
@@ -42,7 +42,7 @@ function LogError(message)
 if (!gl) LogError("OpenGL 2.0 not supported");
 
 //Shaders
-var vertexShaderSource = 
+let vertexShaderSource = 
 `#version 300 es
 
 in vec3 a_position;
@@ -51,22 +51,20 @@ in vec3 a_cubePos;
 
 uniform mat4 view;
 uniform mat4 projection;
-uniform float time;
+uniform float expand;
+uniform float scale;
 
 out vec3 vert_normal;
 
 void main()
 {
-    float expand = sin(pow(sin(time / 15.0), 5.0)) * 200.0;
-    vec3 pos = a_cubePos * expand + a_position;
-
+    vec3 pos = a_cubePos * expand + a_position * scale;
     gl_Position = projection * view * vec4(pos, 1.0);
-
-    vert_normal = vec3(abs(a_normal.x), abs(a_normal.y), abs(a_normal.z));
+    vert_normal = a_normal;
 }
 `;
 
-var fragmentShaderSource = 
+let fragmentShaderSource = 
 `#version 300 es
 
 precision highp float;
@@ -84,10 +82,10 @@ void main()
 //Shader functions
 function CreateShader(gl, type, source)
 {
-    var shader = gl.createShader(type);
+    let shader = gl.createShader(type);
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
-    var success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+    let success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
     if (success)
     {
         return shader;
@@ -100,11 +98,11 @@ function CreateShader(gl, type, source)
 
 function CreateShaderProgram(gl, vertShader, fragShader)
 {
-    var program = gl.createProgram();
+    let program = gl.createProgram();
     gl.attachShader(program, vertShader);
     gl.attachShader(program, fragShader);
     gl.linkProgram(program);
-    var success = gl.getProgramParameter(program, gl.LINK_STATUS);
+    let success = gl.getProgramParameter(program, gl.LINK_STATUS);
     if (success)
     {
         return program;
@@ -116,25 +114,26 @@ function CreateShaderProgram(gl, vertShader, fragShader)
 }
 
 //Create shader program
-var vertShader = CreateShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
-var fragShader = CreateShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
-var shaderProgram = CreateShaderProgram(gl, vertShader, fragShader);
+let vertShader = CreateShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+let fragShader = CreateShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+let shaderProgram = CreateShaderProgram(gl, vertShader, fragShader);
 
 //Set up shader attributes
-var positionAttributeLocation = gl.getAttribLocation(shaderProgram, "a_position");
-var normalAttributeLocation = gl.getAttribLocation(shaderProgram, "a_normal");
-var cubePosAttributeLocation = gl.getAttribLocation(shaderProgram, "a_cubePos");
+let positionAttributeLocation = gl.getAttribLocation(shaderProgram, "a_position");
+let normalAttributeLocation = gl.getAttribLocation(shaderProgram, "a_normal");
+let cubePosAttributeLocation = gl.getAttribLocation(shaderProgram, "a_cubePos");
 
-var viewLocation = gl.getUniformLocation(shaderProgram, "view");
-var projectionLocation = gl.getUniformLocation(shaderProgram, "projection");
-var timeLocation = gl.getUniformLocation(shaderProgram, "time");
+let viewLocation = gl.getUniformLocation(shaderProgram, "view");
+let projectionLocation = gl.getUniformLocation(shaderProgram, "projection");
+let expandLocation = gl.getUniformLocation(shaderProgram, "expand");
+let scaleLocation = gl.getUniformLocation(shaderProgram, "scale");
 
 //Set up vertex array
-var vao = gl.createVertexArray();
+let vao = gl.createVertexArray();
 gl.bindVertexArray(vao);
 
 //Set up vertex buffer
-var vbo = gl.createBuffer();
+let vbo = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
 
 //Set up index buffer
@@ -157,8 +156,8 @@ gl.vertexAttribPointer(cubePosAttributeLocation, 3, gl.FLOAT, false, 4 * 9, 4 * 
 let halfCubefieldSize = cubefieldSize / 2;
 let totalCubeCount = Math.pow(cubefieldSize, 3);
 
-var cubefieldVerts = new Array();
-var cubefieldIndices = new Array();
+let cubefieldVerts = new Array();
+let cubefieldIndices = new Array();
 
 cubefieldVerts.length = 24 * 9 * totalCubeCount;
 
@@ -200,14 +199,58 @@ for (let z = -halfCubefieldSize; z < halfCubefieldSize; z++)
 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(cubefieldVerts), gl.STATIC_DRAW);
 gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint32Array(cubefieldIndices), gl.STATIC_DRAW);
 
+//Camera controls
+let camRotation = 30;
+let camGoalRotation = camRotation;
+let camDragStartRotation = camRotation;
+
+let mousePosX, mousePosY;
+let dragStartX, dragStartY;
+let dragging = false;
+
+//Set up mouse events
+document.addEventListener('mousemove', (event) => {
+    mousePosX = event.x;
+    mousePosY = event.y;
+});
+
+canvas.addEventListener('mousedown', (event) => {
+    dragStartX = mousePosX;
+    dragStartY = mousePosY;
+    camDragStartRotation = camGoalRotation;
+    dragging = true;
+});
+
+canvas.addEventListener('mouseup', (event) => {
+    dragging = false;
+});
+
+window.addEventListener("wheel", (event) => {
+    event.deltaY 
+});
+
 gl.useProgram(shaderProgram);
 gl.enable(gl.DEPTH_TEST);
 
-var timeOffset;
-var firstFrame = true;
+let timeOffset;
+let firstFrame = true;
 
 function Draw(time)
 {
+    //Get mouse delta
+    let mouseDragDeltaX = 0;
+    let mouseDragDeltaY = 0;
+    if (dragging)
+    {
+        mouseDragDeltaX = mousePosX - dragStartX;
+        mouseDragDeltaY = mousePosY - dragStartY;
+        camGoalRotation = camDragStartRotation - mouseDragDeltaX;
+    }
+
+    //Rotate camera towards goal using decay function
+    camRotation += (camGoalRotation - camRotation) / 50;
+
+    //make sure we start at zero
     if (firstFrame)
     {
         timeOffset = -time * 0.001;
@@ -222,21 +265,24 @@ function Draw(time)
     gl.viewport(0, 0, gl.canvas.clientWidth, gl.canvas.clientHeight);
 
     //Calculate view matrix
-    var view = mat4.create();
+    let view = mat4.create();
     let camDist = cubefieldSize * 7;
-    let eye = vec3.fromValues(Math.sin(time / 20) * camDist, camDist * 0.7, Math.cos(time / 20) * camDist);
+    let eye = vec3.fromValues(Math.sin(Radians(camRotation)) * camDist, camDist * 0.685, Math.cos(Radians(camRotation)) * camDist);
     mat4.lookAt(view, eye, vec3.fromValues(0, 0, 0), vec3.fromValues(0, 1, 0));
 
     //Calculate projection matrix
-    var projection = mat4.create();
+    let projection = mat4.create();
     mat4.perspective(projection, Radians(45), gl.canvas.clientWidth / gl.canvas.clientHeight, 1, 5000);
 
     //Send matrices
     gl.uniformMatrix4fv(viewLocation, false, view);
     gl.uniformMatrix4fv(projectionLocation, false, projection);
 
-    //Send time
-    gl.uniform1f(timeLocation, time);
+    //Send expand and scale
+    const expand = 0.3 + Math.abs(Math.sin(Math.pow(Math.sin(time / 10.0), 3.0))) * 150.0;
+    const scale = 1.0 + (expand / 40.0);
+    gl.uniform1f(expandLocation, expand);
+    gl.uniform1f(scaleLocation, scale);
 
     //Clear
     gl.clearColor(0, 0, 0, 0);
