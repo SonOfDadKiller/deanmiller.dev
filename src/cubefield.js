@@ -272,7 +272,7 @@ function Draw(time)
 
     //Calculate projection matrix
     let projection = mat4.create();
-    mat4.perspective(projection, Radians(45), gl.canvas.clientWidth / gl.canvas.clientHeight, 1, 5000);
+    mat4.perspective(projection, Radians(45), gl.canvas.clientWidth / gl.canvas.clientHeight, 1, 4000);
 
     //Send matrices
     gl.uniformMatrix4fv(viewLocation, false, view);
