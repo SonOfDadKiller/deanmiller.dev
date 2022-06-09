@@ -232,19 +232,20 @@ export function GenerateCubefield(cubefieldSize)
         dragStartX = firstTouch.clientX;
         dragStartY = firstTouch.clientY;
         camDragStartRotation = camGoalRotation;
-        dragging = true;
+        //dragging = true;
     });
 
     window.addEventListener("touchmove", (event) => {
         var firstTouch = event.touches.item(0);
         LogError(firstTouch.clientX + ", " + firstTouch.clientY);
 
-        mousePosX = firstTouch.clientX;
-        mousePosY = firstTouch.clientY;
+        let mouseDragDeltaX = firstTouch.clientX - dragStartX;
+        let mouseDragDeltaY = firstTouch.clientY - dragStartY;
+        camGoalRotation = camDragStartRotation - mouseDragDeltaX;
     });
 
     window.addEventListener("touchend", (event) => {
-        dragging = false;
+        //dragging = false;
     });
 
     gl.useProgram(shaderProgram);
