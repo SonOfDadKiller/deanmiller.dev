@@ -26,6 +26,7 @@
 				top: 0px;
 				right: 0px;
                 color: red;
+				user-select: none;
             }
 
 			#name {
@@ -39,13 +40,14 @@
 	</head>
 	<body>
 		<p id="error"></p>
-
 		<canvas id="c"></canvas>
-
 		<h1 id="name">deanmiller.dev</h1>
 
 		<!-- Load Demo -->
-		<script>const cubefieldSize = 35;</script>
         <script src="src/cubefield.js" type="module"></script>
+		<script type="module">
+			import { GenerateCubefield } from "./src/cubefield.js";
+			GenerateCubefield(35);
+		</script>
 	</body>
 </html>
