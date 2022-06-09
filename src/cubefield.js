@@ -221,14 +221,12 @@ export function GenerateCubefield(cubefieldSize)
     });
 
     window.addEventListener("wheel", (event) => {
-        //event.deltaY 
+        //event.deltaY
     });
 
     //Set up touch events
     window.addEventListener("touchstart", (event) => {
         var firstTouch = event.touches.item(0);
-        LogError(firstTouch.clientX + ", " + firstTouch.clientY);
-
         dragStartX = firstTouch.clientX;
         dragStartY = firstTouch.clientY;
         camDragStartRotation = camGoalRotation;
@@ -237,8 +235,6 @@ export function GenerateCubefield(cubefieldSize)
 
     window.addEventListener("touchmove", (event) => {
         var firstTouch = event.touches.item(0);
-        LogError(firstTouch.clientX + ", " + firstTouch.clientY);
-
         let mouseDragDeltaX = firstTouch.clientX - dragStartX;
         let mouseDragDeltaY = firstTouch.clientY - dragStartY;
         camGoalRotation = camDragStartRotation - mouseDragDeltaX;
