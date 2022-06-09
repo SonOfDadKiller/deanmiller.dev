@@ -231,8 +231,26 @@ window.addEventListener("wheel", (event) => {
 
 //Set up touch events
 window.addEventListener("touchstart", (event) => {
-    LogError(event.x + ", " + event.y);
-})
+    var firstTouch = event.touches.item(0);
+    LogError(firstTouch.clientX + ", " + firstTouch.clientY);
+
+    dragStartX = firstTouch.clientX;
+    dragStartY = firstTouch.clientY;
+    camDragStartRotation = camGoalRotation;
+    dragging = true;
+});
+
+window.addEventListener("touchmove", (event) => {
+    var firstTouch = event.touches.item(0);
+    LogError(firstTouch.clientX + ", " + firstTouch.clientY);
+
+    mousePosX = firstTouch.clientX;
+    mousePosY = firstTouch.clientY;
+});
+
+window.addEventListener("touchend", (event) => {
+    dragging = false;
+});
 
 gl.useProgram(shaderProgram);
 gl.enable(gl.DEPTH_TEST);
@@ -243,12 +261,10 @@ let firstFrame = true;
 function Draw(time)
 {
     //Get mouse delta
-    let mouseDragDeltaX = 0;
-    let mouseDragDeltaY = 0;
     if (dragging)
     {
-        mouseDragDeltaX = mousePosX - dragStartX;
-        mouseDragDeltaY = mousePosY - dragStartY;
+        let mouseDragDeltaX = mousePosX - dragStartX;
+        let mouseDragDeltaY = mousePosY - dragStartY;
         camGoalRotation = camDragStartRotation - mouseDragDeltaX;
     }
 
