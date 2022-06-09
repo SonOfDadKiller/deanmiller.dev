@@ -209,25 +209,30 @@ let dragStartX, dragStartY;
 let dragging = false;
 
 //Set up mouse events
-document.addEventListener('mousemove', (event) => {
-    mousePosX = event.x;
-    mousePosY = event.y;
-});
-
-canvas.addEventListener('mousedown', (event) => {
+window.addEventListener("mousedown", (event) => {
     dragStartX = mousePosX;
     dragStartY = mousePosY;
     camDragStartRotation = camGoalRotation;
     dragging = true;
 });
 
-canvas.addEventListener('mouseup', (event) => {
+window.addEventListener("mousemove", (event) => {
+    mousePosX = event.x;
+    mousePosY = event.y;
+});
+
+window.addEventListener("mouseup", (event) => {
     dragging = false;
 });
 
 window.addEventListener("wheel", (event) => {
-    event.deltaY 
+    //event.deltaY 
 });
+
+//Set up touch events
+window.addEventListener("touchstart", (event) => {
+    LogError(event.x + ", " + event.y);
+})
 
 gl.useProgram(shaderProgram);
 gl.enable(gl.DEPTH_TEST);
