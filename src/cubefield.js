@@ -195,7 +195,7 @@ export function GenerateCubefield(cubefieldSize)
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint32Array(cubefieldIndices), gl.STATIC_DRAW);
 
     //Camera controls
-    let camRotation = 30;
+    let camRotation = 45;
     let camGoalRotation = camRotation;
     let camDragStartRotation = camRotation;
 
