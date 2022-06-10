@@ -40,20 +40,6 @@
 				z-index: 1;
 			}
 
-			@media only screen and (max-width: 768px) {
-				.center {
-					left: 0;
-					right: 0;
-				}
-			}
-
-			@media only screen and (max-height: 400px) {
-				.center {
-					left: 0;
-					right: 0;
-				}
-			}
-
 			h1 {
 				color: rgba(255, 255, 255, 0.9);
 				text-align: center;
@@ -87,6 +73,33 @@
 				opacity: 0.9;
 				user-select: none;
 			}
+
+			@media only screen and (max-width: 768px) {
+				.center {
+					left: 0;
+					right: 0;
+				}
+			}
+
+			@media only screen and (max-height: 400px) {
+				.center {
+					left: 0;
+					right: 0;
+					padding: 0;
+					margin: 25px;
+				}
+
+				h1 {
+					font-size: 20pt;
+					padding: 10px;
+				}
+
+				p {
+					font-size: 14px;
+					padding: 10px;
+				}
+			}
+
         </style>
 	</head>
 	<body>
