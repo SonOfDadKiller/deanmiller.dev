@@ -205,10 +205,13 @@ export function GenerateCubefield(cubefieldSize)
 
     //Set up mouse events
     window.addEventListener("mousedown", (event) => {
-        dragStartX = mousePosX;
-        dragStartY = mousePosY;
-        camDragStartRotation = camGoalRotation;
-        dragging = true;
+        if (scrollAmount < 700)
+        {
+            dragStartX = mousePosX;
+            dragStartY = mousePosY;
+            camDragStartRotation = camGoalRotation;
+            dragging = true;
+        }
     });
 
     window.addEventListener("mousemove", (event) => {
@@ -236,7 +239,7 @@ export function GenerateCubefield(cubefieldSize)
     window.addEventListener("touchmove", (event) => {
         var firstTouch = event.touches.item(0);
         let mouseDragDeltaX = firstTouch.clientX - dragStartX;
-        let mouseDragDeltaY = firstTouch.clientY - dragStartY;
+        //let mouseDragDeltaY = firstTouch.clientY - dragStartY;
         camGoalRotation = camDragStartRotation - mouseDragDeltaX;
     });
 
@@ -256,7 +259,7 @@ export function GenerateCubefield(cubefieldSize)
         if (dragging)
         {
             let mouseDragDeltaX = mousePosX - dragStartX;
-            let mouseDragDeltaY = mousePosY - dragStartY;
+            //let mouseDragDeltaY = mousePosY - dragStartY;
             camGoalRotation = camDragStartRotation - mouseDragDeltaX;
         }
 
