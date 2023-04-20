@@ -55,13 +55,23 @@ class BingoCube {
         ctx.fillStyle = '#FFFFFF';
         ctx.globalAlpha = 0.0;
         ctx.fillRect(0, 0, 512, 512);
-        ctx.font = "100px verdana";
+
+        ctx.globalAlpha = 1.0;
+
+        ctx.strokeStyle = '#AAAAAA';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(80, 220, 370, 50);
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(80, 220, 370, 50);
+
+        ctx.font = "35px verdana";
         ctx.textAlign = "center";
         ctx.fillStyle = '#FF0000';
         ctx.globalAlpha = 1.0;
         ctx.fillText(label, 256, 256, 512);
 
-        var labelGeo = new THREE.PlaneGeometry(1, 1);
+        var labelGeo = new THREE.PlaneGeometry(2, 2);
         var labelMat = new THREE.MeshBasicMaterial();
         labelMat.map = new THREE.Texture(labelCanvas);
         labelMat.map.needsUpdate = true;
@@ -133,7 +143,7 @@ window.addEventListener("touchstart", (event) => {
     dragStartY = firstTouch.clientY;
     camDragStartRotationX = camGoalRotationX;
     camDragStartRotationY = camGoalRotationY;
-    //dragging = true;
+    dragging = true;
 });
 
 window.addEventListener("touchmove", (event) => {
@@ -142,6 +152,10 @@ window.addEventListener("touchmove", (event) => {
     let mouseDragDeltaY = firstTouch.clientY - dragStartY;
     camGoalRotationX = camDragStartRotationX - mouseDragDeltaX;
     camGoalRotationY = camDragStartRotationY - mouseDragDeltaY;
+});
+
+window.addEventListener("touchend", (event) => {
+    dragging = false;
 });
 
 let timeOffset;
@@ -177,8 +191,17 @@ function animate(time) {
 
     //Update bingo cubes
     bingoCubes.forEach((bingoCube) => {
-        var rotation = camera.quaternion.clone();
-        bingoCube.labelQuad.setRotationFromQuaternion(rotation);
+        //Label billboarding
+        bingoCube.labelQuad.setRotationFromQuaternion(camera.quaternion);
+
+        //Order by depth in scene
+        // const cubePosition = new THREE.Vector3(bingoCube.x, bingoCube.y, bingoCube.z);
+        // var cameraWorldDir = new THREE.Vector3();
+        // camera.getWorldDirection(cameraWorldDir);
+        // const distance = camera.position.clone().sub(cubePosition).dot(cameraWorldDir);
+
+        // // Set the renderOrder property based on the distance
+        // bingoCube.labelQuad.renderOrder = distance;
     })
 
     renderer.render(scene, camera);
