@@ -2,158 +2,172 @@
 <html lang="en">
 
 <head>
-	<title>deanmiller.dev</title>
-	<link rel="icon" type="image/x-icon" href="favicon.png">
-	<meta charset="utf-8">
-	<meta name="author" content="Dean Miller">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-		}
+    <title>deanmiller.dev</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <meta charset="utf-8">
+    <meta name="author" content="Dean Miller">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-		html {
-			/* height:100%; */
-			background-color: rgb(2.5, 20.4, 51);
-		}
+        html {
+            /* height:100%; */
+            background-color: rgb(2.5, 20.4, 51);
+        }
 
-		#c {
-			position: fixed;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			width: 100%;
-			height: 100%;
-			z-index: -1;
-		}
+        #c {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
 
-		#error {
-			position: absolute;
-			text-align: right;
-			top: 0px;
-			right: 0px;
-			color: red;
-		}
+        #error {
+            position: absolute;
+            text-align: right;
+            top: 0px;
+            right: 0px;
+            color: red;
+        }
 
-		h1 {
-			color: rgba(255, 255, 255, 0.9);
-			text-align: center;
-			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-			padding: 15px;
-			padding-bottom: 55px;
-			/* user-select: none; */
-		}
+        h1 {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            padding: 15px;
+            /* padding-bottom: 25px; */
+            /* user-select: none; */
+        }
 
-		h2 {
-			color: rgba(255, 255, 255, 0.9);
-			text-align: left;
-			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-			padding: 5px;
-			padding-left: 15px;
-			margin-bottom: 6px;
-			margin-top: 50px;
-			/* user-select: none; */
-		}
+        h2 {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: left;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            padding: 5px;
+            padding-left: 15px;
+            margin-bottom: 6px;
+            margin-top: 50px;
+            /* user-select: none; */
+        }
 
-		iframe {
-			margin-bottom: 5px;
-		}
+        .responsive-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+        }
 
-		p {
-			color: rgba(255, 255, 255, 0.9);
-			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-			padding: 15px;
-			padding-bottom: 5px;
-			/* user-select: none; */
-		}
+        .responsive-container {
+            position: relative;
+            overflow: hidden;
+            width: 80%;
+            padding-top: 45%;
+            margin: auto;
+        }
 
-		li {
-			color: rgba(255, 255, 255, 0.9);
-			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-			padding-left: 15px;
-		}
+        p {
+            color: rgba(255, 255, 255, 0.9);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            padding: 15px;
+            padding-bottom: 5px;
+            /* user-select: none; */
+        }
 
-		ul {
-			color: rgba(255, 255, 255, 0.9);
-			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-			padding-left: 50px;
-			margin-top: 10px;
-		}
+        li {
+            color: rgba(255, 255, 255, 0.9);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            padding-left: 15px;
+        }
 
-		a {
-			color: rgb(228, 63, 90);
-		}
+        ul {
+            color: rgba(255, 255, 255, 0.9);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            padding-left: 50px;
+            margin-top: 10px;
+        }
 
-		.media-container {
-			left: 25%;
-			right: 25%;
-			display: flex;
-			justify-content: center;
-		}
+        a {
+            color: rgb(228, 63, 90);
+        }
 
-		.media-button {
-			width: 40px;
-			height: 40px;
-			padding: 11px;
-			opacity: 0.9;
-			user-select: none;
-		}
+        .media-container {
+            left: 25%;
+            right: 25%;
+            display: flex;
+            justify-content: center;
+        }
 
-		.top-gap {
-			position: static;
-			height: 100vh;
-		}
+        .media-button {
+            width: 40px;
+            height: 40px;
+            padding: 11px;
+            opacity: 0.9;
+            user-select: none;
+        }
 
-		.down-arrow {
-			position: absolute;
-			bottom: 30px;
-			right: 0;
-			left: 0;
-			display: inline-block;
-			margin: auto;
-			width: 80px;
-			height: 50px;
-			opacity: 0;
-		}
+        .top-gap {
+            position: static;
+            height: 100vh;
+        }
 
-		.center {
-			background-color: rgba(0, 0, 0, 0.9);
-			width: 45%;
-			margin: auto;
-			margin-top: 50px;
-			margin-bottom: 50px;
-			padding: 3%;
-			border-radius: 25px;
-		}
+        .down-arrow {
+            position: absolute;
+            bottom: 30px;
+            right: 0;
+            left: 0;
+            display: inline-block;
+            margin: auto;
+            width: 80px;
+            height: 50px;
+            opacity: 0;
+        }
 
-		@media only screen and (max-width: 1480px) {
-			.center {
-				width: 60%;
-			}
-		}
+        .center {
+            background-color: rgba(0, 0, 0, 0.9);
+            width: 60%;
+            margin: auto;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 3%;
+            border-radius: 25px;
+        }
 
-		@media only screen and (max-width: 1100px) {
-			.center {
-				width: 80%;
-			}
-		}
+        @media only screen and (max-width: 1480px) {
+            .center {
+                width: 60%;
+            }
+        }
 
-		@media only screen and (max-width: 880px) {
-			.center {
-				width: auto;
-				margin: 0px;
-				margin-bottom: 50px;
-				margin-top: 50px;
-			}
-		}
-	</style>
+        @media only screen and (max-width: 1100px) {
+            .center {
+                width: 80%;
+            }
+        }
+
+        @media only screen and (max-width: 880px) {
+            .center {
+                width: auto;
+                margin: 0px;
+                margin-bottom: 50px;
+                margin-top: 50px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-	<div class="top-gap"></div>
+    <!-- <div class="top-gap"></div>
 	<img id="down-arrow" class="down-arrow" src="res/down-arrow.png"></img>
 
 	<script>
@@ -173,144 +187,155 @@
 		addEventListener('scroll', (event) => {
 			UpdateArrow();
 		});
-	</script>
+	</script> -->
 
-	<!-- <div> -->
-	<div class="center">
-		<h1>Hi, I'm Dean</h1>
-		<p>I work at <a href="https://thisisaura.com/" target="_blank">Aura</a>. I also make games and graphics
-			sometimes.</p>
-		<p>Below are some of my projects.</p>
+    <!-- <div> -->
+    <div class="center">
+        <h1>Hi, I'm Dean</h1>
+        <div class="media-container">
+            <a href="https://www.linkedin.com/in/dean-miller-a29382130/" target="_blank">
+                <img class="media-button" src="res/linkedin.svg"></img>
+            </a>
+            <a href="https://github.com/SonOfDadKiller" target="_blank">
+                <img class="media-button" src="res/github.png"></img>
+            </a>
+            <a href="https://twitter.com/whaleperson" target="_blank">
+                <img class="media-button" src="res/twitter.svg"></img>
+            </a>
+            <a href="https://www.chess.com/member/deanerwiener" target="_blank">
+                <img class="media-button" src="res/pawn.png"></img>
+            </a>
+        </div>
+        <p>I work at <a href="https://thisisaura.com/" target="_blank">Aura</a>. I also make games and graphics
+            sometimes. Below are some of my projects.</p>
 
-		<h2>Burglar's Run</h2>
-		<p>
-			Developed in C++ and using OpenGL for rendering, this is a WIP game intented for eventual release, and my
-			current main project.</p>
+        <!-- <p>Please contact me at:</p> -->
 
-		<p align="center">
-			<iframe width="840" height="473" src="https://www.youtube.com/embed/aDL3bdmiJvA?si=kNlQFcDHGmivhxKR"
-				title="YouTube video player" frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen></iframe>
-		</p>
+        <h2>Burglar's Run</h2>
+        <p>
+            Developed in C++ and using OpenGL for rendering, this is a WIP game intented for eventual release, and my
+            current main project.</p>
 
-		<p>The custom engine it is built upon includes the following features:</p>
+        <div class="responsive-container">
+            <iframe class="responsive-iframe" src="https://www.youtube.com/embed/aDL3bdmiJvA?si=kNlQFcDHGmivhxKR"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
 
-		<ul>
-			<li>2D sprite rendering, with easy batching, a spritesheet animation system, and 9 slicing</li>
-			<li>Truetype text rendering, with batching similar to sprite API (currently bitmap only)</li>
-			<li>Render queue for organizing render events in a pipelined fashion</li>
-			<li>Shader system</li>
-			<li>Keyboard/mouse input handling, event callback binding</li>
-			<li>Collision testing of AABBs, Circles and Rays</li>
-			<li>Immediate mode GUI system, supporting images, text, buttons, windows and more</li>
-			<li>Sparse Graph with A* Pathfinding</li>
-			<li>State-based AI system</li>
-			<li>Debug drawing functions</li>
-		</ul>
+        <p>The custom engine it is built upon includes the following features:</p>
 
-		<p>
-			The following features are planned but not yet implemented:
-		<ul>
-			<li>Support for DX11 and Vulkan</li>
-			<li>SDF text rendering</li>
-			<li>Additional standard GUI system features</li>
-			<li>Additional collision tests</li>
-			<li>More advanced collision system with data structures for optimization</li>
-			<li>Debug console</li>
-		</ul>
-		</p>
+        <ul>
+            <li>2D sprite rendering, with easy batching, a spritesheet animation system, and 9 slicing</li>
+            <li>Truetype text rendering, with batching similar to sprite API (currently bitmap only)</li>
+            <li>Render queue for organizing render events in a pipelined fashion</li>
+            <li>Shader system</li>
+            <li>Keyboard/mouse input handling, event callback binding</li>
+            <li>Collision testing of AABBs, Circles and Rays</li>
+            <li>Immediate mode GUI system, supporting images, text, buttons, windows and more</li>
+            <li>Sparse Graph with A* Pathfinding</li>
+            <li>State-based AI system</li>
+            <li>Debug drawing functions</li>
+        </ul>
 
-		<p align="center">
-			<iframe width="840" height="473" src="https://www.youtube.com/embed/HtWrE-OcgjM?si=_13-J4192G7bJKHs"
-				title="YouTube video player" frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen></iframe>
-		</p>
+        <p>
+            The following features are planned but not yet implemented:
+        <ul>
+            <li>Support for DX11 and Vulkan</li>
+            <li>SDF text rendering</li>
+            <li>Additional standard GUI system features</li>
+            <li>Additional collision tests</li>
+            <li>More advanced collision system with data structures for optimization</li>
+            <li>Debug console</li>
+        </ul>
+        </p>
 
-		<h2>Sneaker</h2>
-		<p>
-			Released in 2019, Sneaker is a first-person stealth game where your weapons are your shoes. It was made by
-			the indie studio Three Beak
-			where I was the game director and lead programmer. I was one of 2 programmers and personally wrote all
-			gameplay, AI and UI code.
-			The game was developed in Unity and C#, and includes the following features:
-		<ul>
-			<li>Innovative time rewind ability that minimizes punishment for failure in a stealth game</li>
-			<li>Devious AI driven guards</li>
-			<li>4 shoes with different abilities</li>
-			<li>6 open-ended levels</li>
-			<li>Original jazz inspired soundtrack</li>
-		</ul>
-		</p>
-		<p align="center">
-			<iframe width="840" height="473" src="https://www.youtube.com/embed/K3HQAa3J0qE"
-				title="YouTube video player" frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen></iframe>
-			<iframe src="https://store.steampowered.com/widget/1018080/" frameborder="0" width="646"
-				height="190"></iframe>
-		</p>
+        <div class="responsive-container">
+            <iframe class="responsive-iframe" src="https://www.youtube.com/embed/HtWrE-OcgjM?si=_13-J4192G7bJKHs"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
 
-		<h2>Stealth Game POC</h2>
-		<p>
-			A POC for a puzzle/stealth game where the player's main tool is a dart gun that allows them to possess
-			enemies. Developed in UE4 using C++.
-		</p>
-		<p align="center">
-			<iframe width="840" height="473" src="https://www.youtube.com/embed/4K9dcmen3yY"
-				title="YouTube video player" frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen></iframe>
-		</p>
+        <h2>Sneaker</h2>
+        <p>
+            Released in 2019, Sneaker is a first-person stealth game where your weapons are your shoes. It was made
+            by
+            the indie studio Three Beak
+            where I was the game director and lead programmer. I was one of 2 programmers and personally wrote all
+            gameplay, AI and UI code.
+            The game was developed in Unity and C#, and includes the following features:
+        <ul>
+            <li>Innovative time rewind ability that minimizes punishment for failure in a stealth game</li>
+            <li>Devious AI driven guards</li>
+            <li>4 shoes with different abilities</li>
+            <li>6 open-ended levels</li>
+            <li>Original jazz inspired soundtrack</li>
+        </ul>
+        </p>
+        <div class="responsive-container">
+            <iframe class="responsive-iframe" src="https://www.youtube.com/embed/K3HQAa3J0qE"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
 
-		<h2>VR Storyboarding Tool</h2>
-		<p>
-			This was was made with another programmer as a paid contract for a film production company in Canberra. It
-			is a VR tool designed for a particular film about people
-			trapped in a car inside a shipping container that gets lost at sea. The client wanted to be able to move
-			certain parts of the car, change scene lighting,
-			position a rigged character model, take screenshots with a virtual camera and do various other things to
-			manipulate the scene and plan out shots for actual filming.
-			Developed under 2 weeks in UE4 using a combination of C++ and Blueprint Visual Scripting.
-		</p>
-		<p align="center">
-			<iframe width="840" height="473" src="https://www.youtube.com/embed/N7yjQzdvvus"
-				title="YouTube video player" frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen></iframe>
-		</p>
+        <div class="responsive-container" style="padding-top:190px">
+            <iframe class="responsive-iframe" src="https://store.steampowered.com/widget/1018080/"
+                frameborder="0"></iframe>
+        </div>
 
-		<div style="height: 100px"></div>
+        <h2>Stealth Game POC</h2>
+        <p>
+            A POC for a puzzle/stealth game where the player's main tool is a dart gun that allows them to possess
+            enemies. Developed in UE4 using C++.
+        </p>
+        <div style="height: 30px"></div>
+        <div class="responsive-container">
+            <iframe class="responsive-iframe" src="https://www.youtube.com/embed/4K9dcmen3yY"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
 
-		<!-- <p>Please contact me at:</p> -->
-		<div class="media-container">
-			<a href="https://www.linkedin.com/in/dean-miller-a29382130/" target="_blank">
-				<img class="media-button" src="res/linkedin.svg"></img>
-			</a>
-			<a href="https://github.com/SonOfDadKiller" target="_blank">
-				<img class="media-button" src="res/github.png"></img>
-			</a>
-			<a href="https://twitter.com/whaleperson" target="_blank">
-				<img class="media-button" src="res/twitter.svg"></img>
-			</a>
-			<a href="https://www.chess.com/member/deanerwiener" target="_blank">
-				<img class="media-button" src="res/pawn.png"></img>
-			</a>
-		</div>
-	</div>
-	<!-- </div> -->
+        <h2>VR Storyboarding Tool</h2>
+        <p>
+            This was was made with another programmer as a paid contract for a film production company in
+            Canberra.
+            It
+            is a VR tool designed for a particular film about people
+            trapped in a car inside a shipping container that gets lost at sea. The client wanted to be able to
+            move
+            certain parts of the car, change scene lighting,
+            position a rigged character model, take screenshots with a virtual camera and do various other
+            things to
+            manipulate the scene and plan out shots for actual filming.
+            Developed under 2 weeks in UE4 using a combination of C++ and Blueprint Visual Scripting.
+        </p>
+        <div style="height: 30px"></div>
+        <div class="responsive-container">
+            <iframe class="responsive-iframe" src="https://www.youtube.com/embed/N7yjQzdvvus"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
 
-	<p id="error"></p>
-	<canvas id="c"></canvas>
+        <div style="height: 100px"></div>
 
-	<!-- Load Demo -->
-	<script src="src/cubefield.js" type="module"></script>
+
+    </div>
+    <!-- </div> -->
+
+    <!-- <p id="error"></p>
+	<canvas id="c"></canvas> -->
+
+    <!-- Load Demo -->
+    <!-- <script src="src/cubefield.js" type="module"></script>
 	<script type="module">
 		import { GenerateCubefield } from "./src/cubefield.js";
 		GenerateCubefield(35);
 		UpdateArrow();
-	</script>
+	</script> -->
 </body>
 
 </html>
