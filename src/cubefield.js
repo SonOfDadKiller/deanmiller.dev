@@ -2,19 +2,15 @@ import { cube as cubeMesh } from "./meshes.js";
 import { mat4, vec3 } from "./../lib/glMatrix/index.js"
 import * as glMatrix from "./../lib/glMatrix/index.js"
 
-export function GenerateCubefield(cubefieldSize)
-{
+export function GenerateCubefield(cubefieldSize) {
     //Helper functions
-    function Radians(degrees)
-    {
+    function Radians(degrees) {
         return degrees * (Math.PI / 180);
     }
 
-    function ResizeCanvasToDisplaySize(canvas)
-    {
-        if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) 
-        {
-            canvas.width  = canvas.clientWidth;
+    function ResizeCanvasToDisplaySize(canvas) {
+        if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+            canvas.width = canvas.clientWidth;
             canvas.height = canvas.clientHeight;
         }
     }
@@ -24,21 +20,19 @@ export function GenerateCubefield(cubefieldSize)
     const gl = canvas.getContext("webgl2");
     const errorText = document.querySelector('#error');
 
-    function LogError(message)
-    {
+    function LogError(message) {
         console.error(message);
         errorText.innerHTML = message;
     }
 
-    if (!gl)
-    {
+    if (!gl) {
         LogError("OpenGL 2.0 not supported");
         return;
     }
 
     //Shaders
-    let vertexShaderSource = 
-    `#version 300 es
+    let vertexShaderSource =
+        `#version 300 es
 
     in vec3 a_position;
     in vec3 a_normal;
@@ -59,8 +53,8 @@ export function GenerateCubefield(cubefieldSize)
     }
     `;
 
-    let fragmentShaderSource = 
-    `#version 300 es
+    let fragmentShaderSource =
+        `#version 300 es
 
     precision highp float;
 
@@ -75,14 +69,12 @@ export function GenerateCubefield(cubefieldSize)
     `;
 
     //Shader functions
-    function CreateShader(gl, type, source)
-    {
+    function CreateShader(gl, type, source) {
         let shader = gl.createShader(type);
         gl.shaderSource(shader, source);
         gl.compileShader(shader);
         let success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
-        if (success)
-        {
+        if (success) {
             return shader;
         }
 
@@ -91,15 +83,13 @@ export function GenerateCubefield(cubefieldSize)
         gl.deleteShader(shader);
     }
 
-    function CreateShaderProgram(gl, vertShader, fragShader)
-    {
+    function CreateShaderProgram(gl, vertShader, fragShader) {
         let program = gl.createProgram();
         gl.attachShader(program, vertShader);
         gl.attachShader(program, fragShader);
         gl.linkProgram(program);
         let success = gl.getProgramParameter(program, gl.LINK_STATUS);
-        if (success)
-        {
+        if (success) {
             return program;
         }
 
@@ -158,16 +148,12 @@ export function GenerateCubefield(cubefieldSize)
 
     let cubeIndex = 0;
 
-    for (let z = -halfCubefieldSize; z < halfCubefieldSize; z++)
-    {
-        for (let y = -halfCubefieldSize; y < halfCubefieldSize; y++)
-        {
-            for (let x = -halfCubefieldSize; x < halfCubefieldSize; x++)
-            {
+    for (let z = -halfCubefieldSize; z < halfCubefieldSize; z++) {
+        for (let y = -halfCubefieldSize; y < halfCubefieldSize; y++) {
+            for (let x = -halfCubefieldSize; x < halfCubefieldSize; x++) {
                 //Copy vert data
                 let vOffset = 0;
-                while (vOffset < 264)
-                {
+                while (vOffset < 264) {
                     let v = (cubeIndex * 24 * 9) + vOffset;
                     cubefieldVerts[v] = cubeMesh.vertices[vOffset];
                     cubefieldVerts[v + 1] = cubeMesh.vertices[vOffset + 1];
@@ -205,8 +191,7 @@ export function GenerateCubefield(cubefieldSize)
 
     //Set up mouse events
     window.addEventListener("mousedown", (event) => {
-        if (scrollAmount < 700)
-        {
+        if (scrollAmount < 700) {
             dragStartX = mousePosX;
             dragStartY = mousePosY;
             camDragStartRotation = camGoalRotation;
@@ -240,7 +225,7 @@ export function GenerateCubefield(cubefieldSize)
         var firstTouch = event.touches.item(0);
         let mouseDragDeltaX = firstTouch.clientX - dragStartX;
         //let mouseDragDeltaY = firstTouch.clientY - dragStartY;
-        camGoalRotation = camDragStartRotation - mouseDragDeltaX;
+        camGoalRotation = camDragStartRotation - mouseDragDeltaX / 5;
     });
 
     window.addEventListener("touchend", (event) => {
@@ -253,22 +238,19 @@ export function GenerateCubefield(cubefieldSize)
     let timeOffset;
     let firstFrame = true;
 
-    function Draw(time)
-    {
+    function Draw(time) {
         //Get mouse delta
-        if (dragging)
-        {
+        if (dragging) {
             let mouseDragDeltaX = mousePosX - dragStartX;
             //let mouseDragDeltaY = mousePosY - dragStartY;
-            camGoalRotation = camDragStartRotation - mouseDragDeltaX;
+            camGoalRotation = camDragStartRotation - mouseDragDeltaX / 5;
         }
 
         //Rotate camera towards goal using decay function
         camRotation += (camGoalRotation - camRotation) / 50;
 
         //make sure we start at zero
-        if (firstFrame)
-        {
+        if (firstFrame) {
             timeOffset = -time * 0.001;
             firstFrame = false;
         }
