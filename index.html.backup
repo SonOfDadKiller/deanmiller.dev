@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>deanmiller.dev</title>
+	<link rel="icon" type="image/x-icon" href="favicon.png">
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+	<meta charset="utf-8">
+	<meta name="author" content="Dean Miller">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+	<div class="top-gap"></div>
+	<img id="down-arrow" class="down-arrow" src="res/down-arrow.png"></img>
+
+	<script>
+		//Control down arrow opacity based on scroll
+		let downArrow = document.getElementById("down-arrow");
+		let targetOpacity = 0;
+		var scrollAmount;
+
+		function UpdateArrow() {
+			scrollAmount = document.documentElement.scrollTop || document.body.scrollTop;
+			var opacity = (700 - scrollAmount) / 500;
+			downArrow.style.opacity = opacity;
+			//window.requestAnimationFrame(scrollUpdate);
+		}
+
+		//UpdateArrow();
+		addEventListener('scroll', (event) => {
+			UpdateArrow();
+		});
+	</script>
+
+	<!-- <div> -->
+	<div class="center">
+		<h1>Hi, I'm Dean</h1>
+		<div class="media-container">
+			<a href="https://www.linkedin.com/in/dean-miller-8b016436b/" target="_blank">
+				<img class="media-button" src="res/linkedin.svg"></img>
+			</a>
+			<a href="https://github.com/SonOfDadKiller" target="_blank">
+				<img class="media-button" src="res/github.png"></img>
+			</a>
+			<a href="https://twitter.com/sonofdadkiller" target="_blank">
+				<img class="media-button" src="res/twitter.svg"></img>
+			</a>
+			<!-- <a href="https://www.chess.com/member/deano2620" target="_blank">
+				<img class="media-button" src="res/pawn.png"></img>
+			</a> -->
+		</div>
+		<p style="text-align: center">Currently looking for work, I am a "badass programmer" (according to some). Below are some of my
+			personal projects.</p>
+
+		<!-- Filter buttons -->
+		<div class="filter-container">
+			<button class="filter-button active" data-filter="all">All</button>
+			<button class="filter-button" data-filter="games">Games</button>
+			<button class="filter-button" data-filter="engine">Engine / Rendering</button>
+			<button class="filter-button" data-filter="misc">Miscellaneous</button>
+		</div>
+
+		<div class="projects-container">
+			<!-- Column 1 -->
+			<div class="column">
+				<h2 class="category-heading">Games</h2>
+
+				<h2 class="project-heading">Sneaker</h2>
+				<p>
+					Released in 2019, Sneaker is a first-person stealth game where your weapons are your shoes. It was made
+					by the indie studio Three Beak where I was the game director and lead programmer. I was one of 2 programmers
+					and personally wrote all gameplay, AI and UI code. The game was developed in Unity and C#, and includes the
+					following features:
+				</p>
+				<ul>
+					<li>Innovative time rewind ability that minimizes punishment for failure in a stealth game</li>
+					<li>Devious AI driven guards</li>
+					<li>4 shoes with different abilities</li>
+					<li>6 open-ended levels</li>
+					<li>Original jazz inspired soundtrack</li>
+				</ul>
+
+				<div class="responsive-container">
+					<iframe class="responsive-iframe" src="https://www.youtube.com/embed/K3HQAa3J0qE"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+				</div>
+
+				<div class="responsive-container" style="padding-top:190px">
+					<iframe class="responsive-iframe" src="https://store.steampowered.com/widget/1018080/"
+						frameborder="0"></iframe>
+				</div>
+
+
+				<!-- SWAT God -->
+				<h2 class="project-heading">SWAT God</h2>
+				<p>
+					This is a hyper fast top-down shooter that aims to remove all limits. Moving with your mouse cursor means infinite speed and precision. Enemies with faster-than-human reactions will hunt you down, surround you, bombard you with grenades and rockets.
+				</p>
+
+				<div class="gallery-stack">
+					<a href="res/SWATGod/1.jpg" class="glightbox" data-gallery="swatgod-gallery">
+						<img src="res/SWATGod/1.jpg" alt="Swatgod">
+					</a>
+					<a href="res/SWATGod/2.jpg" class="glightbox" data-gallery="swatgod-gallery">
+						<img src="res/SWATGod/2.jpg" alt="Swatgod">
+					</a>
+					<a href="res/SWATGod/3.jpg" class="glightbox" data-gallery="swatgod-gallery">
+						<img src="res/SWATGod/3.jpg" alt="Swatgod">
+					</a>
+					<!-- Hidden images for full gallery -->
+					<a href="res/SWATGod/4.jpg" class="glightbox" data-gallery="swatgod-gallery" style="display:none;"></a>
+					<a href="res/SWATGod/5.jpg" class="glightbox" data-gallery="swatgod-gallery" style="display:none;"></a>
+				</div>
+				<div style="height:20px"></div>
+				<div style="text-align: center;">
+					<iframe frameborder="0" src="https://itch.io/embed/4203894" width="552" height="167"><a href="https://stranger.itch.io/swat-god">SWAT God by FrogStore</a></iframe>
+				</div>
+
+
+				<!-- Boxes and Buttons -->
+				<h2 class="project-heading">Boxes & Buttons</h2>
+				<p>
+					A Sokoban-like puzzle game where you push boxes onto buttons, with an interesting twist. I am quite proud of the puzzle design on this one. Programmed in C++ using Raylib to render, and emscripten to build for web.
+				</p>
+				<a href="sokoban.html" class="play-button" target="_blank">
+					Play Now!
+				</a>
+				<div class="gallery-stack">
+					<a href="res/Sokoban/1.png" class="glightbox" data-gallery="sokoban-gallery">
+						<img src="res/Sokoban/1.png" alt="Sokoban">
+					</a>
+					<a href="res/Sokoban/2.png" class="glightbox" data-gallery="sokoban-gallery">
+						<img src="res/Sokoban/2.png" alt="Sokoban">
+					</a>
+					<a href="res/Sokoban/3.png" class="glightbox" data-gallery="sokoban-gallery">
+						<img src="res/Sokoban/3.png" alt="Sokoban">
+					</a>
+					<!-- Hidden images for full gallery -->
+					<a href="res/Sokoban/4.png" class="glightbox" data-gallery="sokoban-gallery" style="display:none;"></a>
+				</div>
+
+				<!-- Stealth Game POC -->
+				<h2 class="project-heading">Stealth Game POC</h2>
+				<p>
+					A POC for a puzzle/stealth game where the player's main tool is a dart gun that allows them to possess
+					enemies. Developed in UE4 using C++.
+				</p>
+				<div class="responsive-container">
+					<iframe class="responsive-iframe" src="https://www.youtube.com/embed/4K9dcmen3yY"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+				</div>
+
+				<!-- Khanate -->
+				<h2 class="project-heading">Khanate - Mongol RPG</h2>
+				<p>
+					A strategy game inspired by the Mount & Blade series where you play as the leader of a Mongol clan. Programmed in Monogame in C#.
+				</p>
+				<div class="gallery-stack">
+					<a href="res/Khanate/1.png" class="glightbox" data-gallery="khanate-gallery">
+						<img src="res/Khanate/1.png" alt="Khanate">
+					</a>
+					<a href="res/Khanate/2.png" class="glightbox" data-gallery="khanate-gallery">
+						<img src="res/Khanate/2.png" alt="Khanate">
+					</a>
+					<a href="res/Khanate/3.png" class="glightbox" data-gallery="khanate-gallery">
+						<img src="res/Khanate/3.png" alt="Khanate">
+					</a>
+					<!-- Hidden images for full gallery -->
+					<a href="res/Khanate/4.png" class="glightbox" data-gallery="khanate-gallery" style="display:none;"></a>
+					<a href="res/Khanate/5.png" class="glightbox" data-gallery="khanate-gallery" style="display:none;"></a>
+					<a href="res/Khanate/6.png" class="glightbox" data-gallery="khanate-gallery" style="display:none;"></a>
+					<a href="res/Khanate/7.png" class="glightbox" data-gallery="khanate-gallery" style="display:none;"></a>
+				</div>
+
+
+				<!-- Diggy Mine -->
+				<h2 class="project-heading">Diggy Mine</h2>
+				<p>
+					A prototype for a Dungeon Keeper clone. Programmed in C# in Monogame.
+				</p>
+				<div class="responsive-container">
+					<iframe class="responsive-iframe" src="https://www.youtube.com/embed/yFXTQ1HpLSE?si=BkUvEN9bfs15cHZU"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+				</div>
+
+				<!-- Let's Fighting Giant Robot Love -->
+				<h2 class="project-heading">Let's Fighting Giant Robot Love</h2>
+				<p>
+					A prototype for a VR game where you pilot a giant mech and battle against an equally giant snail. Programmed in Unity in C#.
+				</p>
+				<div class="responsive-container">
+					<iframe class="responsive-iframe" src="https://www.youtube.com/embed/L2yp4hQuCBk?si=80oQJwdgEM5YxR5N"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+				</div>
+
+
+			</div>
+			<!-- End Column 1 -->
+
+			<!-- Column 2 -->
+			<div class="column">
+				<h2 class="category-heading">Engine / Rendering</h2>
+
+				<!-- Burglars Run -->
+				<h2 class="project-heading">Burglar's Run</h2>
+				<p>
+					This is a game written in C++ and using OpenGL for rendering, and a small number of open source libraries for window handling and loading of assets.
+				</p>
+
+				<div class="responsive-container">
+					<iframe class="responsive-iframe" src="https://www.youtube.com/embed/aDL3bdmiJvA?si=kNlQFcDHGmivhxKR"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+				</div>
+
+				<p>
+					The custom engine for the game can be accessed <a href="https://github.com/SonOfDadKiller/bingus"
+						target="_blank">through github</a>. It includes the following features:
+				</p>
+
+				<ul>
+					<li>2D sprite rendering, with easy batching, a spritesheet animation system, and 9 slicing</li>
+					<li>Truetype text rendering, with batching similar to sprite API (currently bitmap only)</li>
+					<li>Render queue for organizing render events in a pipelined fashion</li>
+					<li>Shader system</li>
+					<li>Keyboard/mouse input handling, event callback binding</li>
+					<li>Collision testing of AABBs, Circles and Rays</li>
+					<li>Immediate mode GUI system, supporting images, text, buttons, windows and more</li>
+					<li>Sparse Graph with A* Pathfinding</li>
+					<li>State-based AI system</li>
+					<li>Debug drawing functions</li>
+				</ul>
+
+				<p>
+					The following features are planned but not yet implemented:
+				</p>
+				<ul>
+					<li>Support for DX11 and Vulkan</li>
+					<li>SDF text rendering</li>
+					<li>Additional standard GUI system features</li>
+					<li>Additional collision tests</li>
+					<li>More advanced collision system with data structures for optimization</li>
+					<li>Debug console</li>
+				</ul>
+
+				<div class="responsive-container">
+					<iframe class="responsive-iframe" src="https://www.youtube.com/embed/HtWrE-OcgjM?si=_13-J4192G7bJKHs"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+				</div>
+
+			</div>
+			<!-- End Column 2 -->
+
+			<!-- Column 3 -->
+			<div class="column">
+				<h2 class="category-heading">Miscellaneous</h2>
+
+				<!-- VR Storyboarding Tool -->
+				<h2 class="project-heading">VR Storyboarding Tool</h2>
+				<p>
+					This was was made with another programmer as a paid contract for a film production company in
+					Canberra. It is a VR tool designed for a particular film about people trapped in a car inside a
+					shipping container that gets lost at sea. The client wanted to be able to move certain parts of the car,
+					change scene lighting, position a rigged character model, take screenshots with a virtual camera and do
+					various other things to manipulate the scene and plan out shots for actual filming. Developed under 2 weeks
+					in UE4 using a combination of C++ and Blueprint Visual Scripting.
+				</p>
+				<div class="responsive-container">
+					<iframe class="responsive-iframe" src="https://www.youtube.com/embed/N7yjQzdvvus"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+				</div>
+
+			</div>
+			<!-- End Column 3 -->
+
+		</div>
+		<!-- End columns-container -->
+
+		<div style="height: 100px"></div>
+
+
+	</div>
+	<!-- </div> -->
+
+	<p id="error"></p>
+	<canvas id="c"></canvas>
+
+	<!-- Load Demo -->
+	<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+	<script src="src/cubefield.js" type="module"></script>
+	<script type="module">
+		import { GenerateCubefield } from "./src/cubefield.js";
+		GenerateCubefield(35);
+		UpdateArrow();
+	</script>
+	<script>
+		// Initialize GLightbox for photo galleries
+		const lightbox = GLightbox({
+			touchNavigation: true,
+			loop: true,
+			autoplayVideos: true
+		});
+	</script>
+</body>
+
+</html>
