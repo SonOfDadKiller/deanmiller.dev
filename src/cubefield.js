@@ -191,6 +191,7 @@ export function GenerateCubefield(cubefieldSize) {
 
     //Set up mouse events
     window.addEventListener("mousedown", (event) => {
+        const scrollAmount = document.documentElement.scrollTop || document.body.scrollTop;
         if (scrollAmount < 700) {
             dragStartX = mousePosX;
             dragStartY = mousePosY;
