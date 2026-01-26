@@ -33,7 +33,7 @@
 				<img class="media-button" src="res/pawn.png"></img>
 			</a> -->
 		</div>
-		<p style="text-align: center">Currently looking for work, I am a "badass programmer" (according to some). Below are some of my
+		<p style="text-align: center">I am a programmer interested in game development and computing. Below are some of my
 			personal projects.</p>
 
 		<!-- Filter buttons -->
@@ -49,7 +49,7 @@
 		</div>
 
 		<div class="projects-container">
-				<div class="project-item" data-category="games unity c#">
+				<div class="project-item" data-category="games unity c#" data-sort-order="1">
 					<h2 class="project-heading">Sneaker</h2>
 					<span class="category-tag">Games</span>
 					<span class="category-tag">Unity</span>
@@ -81,7 +81,7 @@
 					</div>
 				</div>
 
-				<div class="project-item" data-category="games unity c#">
+				<div class="project-item" data-category="games unity c#" data-sort-order="2">
 					<h2 class="project-heading">SWAT God</h2>
 					<span class="category-tag">Games</span>
 					<span class="category-tag">Unity</span>
@@ -112,7 +112,7 @@
 					</div>
 				</div>
 
-				<div class="project-item" data-category="games c++">
+				<div class="project-item" data-category="games c++" data-sort-order="3">
 					<h2 class="project-heading">Boxes & Buttons</h2>
 					<span class="category-tag">Games</span>
 					<span class="category-tag">C++</span>
@@ -138,7 +138,7 @@
 					</div>
 				</div>
 
-				<div class="project-item" data-category="games unreal c++">
+				<div class="project-item" data-category="games unreal c++" data-sort-order="4">
 					<h2 class="project-heading">Stealth Game POC</h2>
 					<span class="category-tag">Games</span>
 					<span class="category-tag">Unreal</span>
@@ -155,7 +155,7 @@
 					</div>
 				</div>
 
-				<div class="project-item" data-category="games c#">
+				<div class="project-item" data-category="games c#" data-sort-order="5">
 					<h2 class="project-heading">Khanate - Mongol RPG</h2>
 					<span class="category-tag">Games</span>
 					<span class="category-tag">C#</span>
@@ -180,7 +180,7 @@
 					</div>
 				</div>
 
-				<div class="project-item" data-category="games c#">
+				<div class="project-item" data-category="games c#" data-sort-order="6">
 					<h2 class="project-heading">Diggy Mine</h2>
 					<span class="category-tag">Games</span>
 					<span class="category-tag">C#</span>
@@ -195,7 +195,7 @@
 					</div>
 				</div>
 
-				<div class="project-item" data-category="games unity c#">
+				<div class="project-item" data-category="games unity c#" data-sort-order="7">
 					<h2 class="project-heading">Let's Fighting Giant Robot Love</h2>
 					<span class="category-tag">Games</span>
 					<span class="category-tag">Unity</span>
@@ -211,13 +211,15 @@
 					</div>
 				</div>
 
-				<div class="project-item" data-category="games engine c++">
+				<div class="project-item" data-category="games engine c++" data-sort-order="8">
 					<h2 class="project-heading">Burglar's Run</h2>
 					<span class="category-tag">Games</span>
 					<span class="category-tag">Engine / Rendering</span>
 					<span class="category-tag">C++</span>
 					<p>
-					This is a game written in C++ and using OpenGL for rendering, and a small number of open source libraries for window handling and loading of assets.
+					My first attempt at writing a custom game engine.
+					This is a game written in C++ and using OpenGL for rendering, and a small number of open source 
+					libraries for window handling and loading of assets.
 					</p>
 
 					<div class="responsive-container">
@@ -245,18 +247,6 @@
 					<li>Debug drawing functions</li>
 					</ul>
 
-					<p>
-					The following features are planned but not yet implemented:
-					</p>
-					<ul>
-					<li>Support for DX11 and Vulkan</li>
-					<li>SDF text rendering</li>
-					<li>Additional standard GUI system features</li>
-					<li>Additional collision tests</li>
-					<li>More advanced collision system with data structures for optimization</li>
-					<li>Debug console</li>
-					</ul>
-
 					<div class="responsive-container">
 					<iframe class="responsive-iframe" src="https://www.youtube.com/embed/HtWrE-OcgjM?si=_13-J4192G7bJKHs"
 					title="YouTube video player" frameborder="0"
@@ -265,7 +255,41 @@
 					</div>
 				</div>
 
-				<div class="project-item" data-category="misc unreal c++">
+				<div class="project-item" data-category="engine c++" data-sort-order="8">
+					<h2 class="project-heading">Experimental Sprite Renderer / 2D Game Engine</h2>
+					<span class="category-tag">Engine / Rendering</span>
+					<span class="category-tag">C++</span>
+					<p>
+					My second attempt at writing a custom game engine. This time I am using an experimental technique
+					to render many 3D looking objects as 2D sprites, by procedurally rendering out an object
+					to a texture array containing 3D information (color, normal, depth, etc) in a shader, and then performing lighting calculations
+					when rendering that texture to a quad.
+
+					The engine itself also sports a number of features, and is far better than my first attempt.
+					</p>
+
+					<ul>
+					<li>Experimental "Faux 3D" sprite rendering</li>
+					<li>Bitmap text rendering of truetype fonts</li>
+					<li>Hot reloading of game assets (textures, audio, fonts, shaders, etc) </li>
+					<li>Hot reloading of game code - the game layer is compiled as a .dll and can be recompiled/loaded while the game is running</li>
+					<li>Designed to be platform and render API agonstic - the codebase is split into 3 layers (Game/Platform/Renderer) so that portability will be possible in the future. I have written and tested a Web platform layer implementation, but it is out of date and does not compile</li>
+					<li>Custom allocators and containers - the codebase does not use C++ standard library containers at all</li>
+					<li>Basic audio mixing, and outputting to the speaker on Windows using WASAPI</li>
+					<li>Controller support for Windows using XInput</li>
+					</ul>
+
+					<div class="responsive-container">
+					<iframe class="responsive-iframe" src="https://www.youtube.com/embed/T1iwf3a5Gt0?si=8Le9JwwcuyXwJvGk"
+					title="YouTube video player" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen></iframe>
+					</div>
+
+
+				</div>
+
+				<div class="project-item" data-category="misc unreal c++" data-sort-order="9">
 					<h2 class="project-heading">VR Storyboarding Tool</h2>
 					<span class="category-tag">Miscellaneous</span>
 					<span class="category-tag">Unreal</span>
