@@ -31,6 +31,46 @@ const filterButtons = document.querySelectorAll('.filter-button');
 const projectItems = document.querySelectorAll('.project-item');
 let activeFilters = new Set(['all']);
 
+// Masonry layout with horizontal ordering
+const COL_COUNT = 3;
+const GAP = 20;
+
+function layoutMasonry() {
+	const container = document.querySelector('.projects-container');
+	const isMobile = window.innerWidth <= 1200;
+
+	const visible = Array.from(projectItems).filter(item => !item.classList.contains('hidden'));
+	visible.sort((a, b) => {
+		const orderA = parseInt(a.dataset.sortOrder) || 999;
+		const orderB = parseInt(b.dataset.sortOrder) || 999;
+		return orderA - orderB;
+	});
+
+	// Reorder DOM elements to match sort order
+	visible.forEach(item => container.appendChild(item));
+
+	let colCount = isMobile ? 1 : COL_COUNT;
+
+	const containerWidth = container.offsetWidth;
+	const colWidth = (containerWidth - (colCount - 1) * GAP) / colCount;
+	const colHeights = new Array(colCount).fill(0);
+
+	visible.forEach((item, i) => {
+		const col = i % colCount;
+		item.style.width = colWidth + 'px';
+		item.style.left = col * (colWidth + GAP) + 'px';
+		item.style.top = colHeights[col] + 'px';
+		colHeights[col] += item.offsetHeight + GAP;
+	});
+
+	container.style.height = Math.max(...colHeights) + 'px';
+	container.style.opacity = '1';
+}
+
+// Layout after all resources (images, iframes) have loaded
+window.addEventListener('load', layoutMasonry);
+window.addEventListener('resize', layoutMasonry);
+
 filterButtons.forEach(button => {
 	button.addEventListener('click', () => {
 		const filter = button.dataset.filter;
@@ -74,5 +114,8 @@ filterButtons.forEach(button => {
 				item.classList.add('hidden');
 			}
 		});
+
+		// Re-layout after filtering to maintain order
+		layoutMasonry();
 	});
 });
