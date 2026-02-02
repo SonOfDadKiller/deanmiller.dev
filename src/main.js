@@ -71,6 +71,10 @@ function layoutMasonry() {
 window.addEventListener('load', layoutMasonry);
 window.addEventListener('resize', layoutMasonry);
 
+// Re-layout when any project item changes size (e.g. iframe content loads late)
+const resizeObserver = new ResizeObserver(layoutMasonry);
+projectItems.forEach(item => resizeObserver.observe(item));
+
 filterButtons.forEach(button => {
 	button.addEventListener('click', () => {
 		const filter = button.dataset.filter;
