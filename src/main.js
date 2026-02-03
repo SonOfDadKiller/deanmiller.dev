@@ -35,7 +35,18 @@ let activeFilters = new Set(['all']);
 const COL_COUNT = 3;
 const GAP = 20;
 
-function layoutMasonry() {
+let isLayouting = false;
+
+// Reorder DOM to match sort order (only call when order changes, not on resize)
+function reorderDOM(container, visible) {
+	visible.forEach(item => container.appendChild(item));
+}
+
+// Position items in masonry layout
+function layoutMasonry(reorder = false) {
+	if (isLayouting) return;
+	isLayouting = true;
+
 	const container = document.querySelector('.projects-container');
 	const isMobile = window.innerWidth <= 1200;
 
@@ -46,8 +57,9 @@ function layoutMasonry() {
 		return orderA - orderB;
 	});
 
-	// Reorder DOM elements to match sort order
-	visible.forEach(item => container.appendChild(item));
+	if (reorder) {
+		reorderDOM(container, visible);
+	}
 
 	let colCount = isMobile ? 1 : COL_COUNT;
 
@@ -65,14 +77,16 @@ function layoutMasonry() {
 
 	container.style.height = Math.max(...colHeights) + 'px';
 	container.style.opacity = '1';
+
+	requestAnimationFrame(() => { isLayouting = false; });
 }
 
 // Layout after all resources (images, iframes) have loaded
-window.addEventListener('load', layoutMasonry);
-window.addEventListener('resize', layoutMasonry);
+window.addEventListener('load', () => layoutMasonry(true));
+window.addEventListener('resize', () => layoutMasonry(false));
 
 // Re-layout when any project item changes size (e.g. iframe content loads late)
-const resizeObserver = new ResizeObserver(layoutMasonry);
+const resizeObserver = new ResizeObserver(() => layoutMasonry(false));
 projectItems.forEach(item => resizeObserver.observe(item));
 
 filterButtons.forEach(button => {
@@ -120,6 +134,6 @@ filterButtons.forEach(button => {
 		});
 
 		// Re-layout after filtering to maintain order
-		layoutMasonry();
+		layoutMasonry(true);
 	});
 });
