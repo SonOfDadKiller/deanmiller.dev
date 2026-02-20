@@ -122,7 +122,7 @@ a {
 
 .top-gap {
 	position: static;
-	height: 100vh;
+	/* height: 100vh; */
 }
 
 .down-arrow {
