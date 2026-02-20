@@ -1,14 +1,14 @@
 import { GenerateCubefield } from "./cubefield.js";
 
 // Down arrow opacity control
-let downArrow = document.getElementById("down-arrow");
+// let downArrow = document.getElementById("down-arrow");
 let targetOpacity = 0;
 var scrollAmount;
 
 function UpdateArrow() {
 	scrollAmount = document.documentElement.scrollTop || document.body.scrollTop;
 	var opacity = (700 - scrollAmount) / 500;
-	downArrow.style.opacity = opacity;
+	// downArrow.style.opacity = opacity;
 }
 
 addEventListener('scroll', (event) => {
